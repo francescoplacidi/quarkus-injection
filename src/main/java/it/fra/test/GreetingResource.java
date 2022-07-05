@@ -1,5 +1,6 @@
 package it.fra.test;
 
+import javax.enterprise.inject.Instance;
 import javax.inject.Inject;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -12,11 +13,11 @@ import it.fra.test.service.Greeter;
 public class GreetingResource {
 
     @Inject
-    Greeter greeter;
+    Instance<Greeter> greeter;
 
     @GET
     @Produces(MediaType.TEXT_PLAIN)
     public String hello() {
-        return String.format("Hello %s", greeter.message());
+        return String.format("Hello %s", greeter.get().message());
     }
 }
